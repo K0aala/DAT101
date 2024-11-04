@@ -114,52 +114,74 @@ printOut(newLine);
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 
-
-const d1 = Math.ceil(Math.random() * 6);
-const d2 = Math.ceil(Math.random() * 6);
-const d3 = Math.ceil(Math.random() * 6);
-const d4 = Math.ceil(Math.random() * 6);
-const d5 = Math.ceil(Math.random() * 6);
-const d6 = Math.ceil(Math.random() * 6);
-
-let diceThrow = "";
-diceThrow += d1.toString() + ",";
-diceThrow += d2.toString() + ",";
-diceThrow += d3.toString() + ",";
-diceThrow += d4.toString() + ",";
-diceThrow += d5.toString() + ",";
-diceThrow += d6.toString();
-
-
-printOut("diceThrow: " + diceThrow);
-
-const count1 = (diceThrow.match(/1/g) || "").length;
-const count2 = (diceThrow.match(/2/g) || "").length;
-const count3 = (diceThrow.match(/3/g) || "").length;
-const count4 = (diceThrow.match(/4/g) || "").length;
-const count5 = (diceThrow.match(/5/g) || "").length;
-const count6 = (diceThrow.match(/6/g) || "").length;
-
-let diceCount = "";
-diceCount += count1.toString() + ",";
-diceCount += count2.toString() + ",";
-diceCount += count3.toString() + ",";
-diceCount += count4.toString() + ",";
-diceCount += count5.toString() + ",";
-diceCount += count6.toString();
-printOut("diceCount: " + diceCount);
-
-const equals1 = (diceCount.match(/1/g) || "").length;
-const equals6 = (diceCount.match(/6/g) || "").length;
-printOut("equals1: " + equals1.toString());
-printOut("equals6: " + equals6.toString());
-
-if(equals1 === 6){
-  printOut("Full straight");
-}else if(equals6 === 1){
-  printOut("Yatzy!!!");
-}
-
+ let answer = "";
+  let rolls = 0;
+  let done = false;
+  let hasYahtzee = false;   
+  let hasStraight = false;  
+  let has3Pair = false;      
+  let hasTower = false;     
+  do {
+    const d1 = Math.ceil(Math.random() * 6);  
+    const d2 = Math.ceil(Math.random() * 6);  
+    const d3 = Math.ceil(Math.random() * 6);  
+    const d4 = Math.ceil(Math.random() * 6);  
+    const d5 = Math.ceil(Math.random() * 6);  
+    const d6 = Math.ceil(Math.random() * 6);  
+    const txtD = (d1 + "," + d2 + "," + d3 + "," + d4 + "," + d5 + "," + d6); 
+    rolls++;  
+    if ((d1 === d2) && (d1 === d3) && (d1 === d4) && (d1 === d5) && (d1 === d6)) {
+      
+      if (hasYahtzee === false) {
+        hasYahtzee = true;
+        answer += txtD + newLine;
+        answer += "Yatzi!" + newLine;
+        answer += "På " + rolls.toString() + " kast!" + newLine + newLine;
+      }
+    } else {
+      
+      
+      const cD1 = (txtD.match(/1/g) || "").length; 
+      const cD2 = (txtD.match(/2/g) || "").length;
+      const cD3 = (txtD.match(/3/g) || "").length;
+      const cD4 = (txtD.match(/4/g) || "").length;
+      const cD5 = (txtD.match(/5/g) || "").length;
+      const cD6 = (txtD.match(/6/g) || "").length;
+      if ((cD1 === 1) && (cD2 === 1) && (cD3 === 1) && (cD4 === 1) && (cD5 === 1) && (cD6 === 1)) {
+        
+        if (hasStraight === false) {
+          hasStraight = true;
+          answer += txtD + newLine;
+          answer += "Full straight" + newLine;
+          answer += "På " + rolls.toString() + " Kast!" + newLine + newLine;
+        }
+      } else {
+        
+        const txtCD = cD1 + "," + cD2 + "," + cD3 + "," + cD4 + "," + cD5 + "," + cD6;
+        const ccD2 = (txtCD.match(/2/g) || "").length;
+        const ccD4 = (txtCD.match(/4/g) || "").length;
+        if (ccD2 === 3) {
+          
+          if (has3Pair === false) {
+            has3Pair = true;
+            answer += txtD + newLine;
+            answer += "3 Par" + newLine;
+            answer += "På " + rolls.toString() + " kast!" + newLine  + newLine;
+          }
+        } else if ((ccD2 === 1) && (ccD4 === 1)) {
+        
+          if (hasTower === false) {
+            hasTower = true;
+            answer += txtD + newLine;
+            answer += "Tårn" + newLine;
+            answer += "På " + rolls.toString() + " kast!" + newLine  + newLine;
+          }
+        }
+      }
+    }
+    done = hasYahtzee && hasStraight;
+  } while (done === false);
+  printOut(answer + newLine);
 
 printOut(newLine);
 
