@@ -75,29 +75,72 @@ printOut(newLine);
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 
-function blaBla(lego, trakt, boks, ost, tak){
-const byggeLego = lego * 100;
-const brygge = trakt + boks + ost + tak;
+const ETemperaturType = { Celsius: 1, Fahrenheit: 2, Kelvin: 3 };
 
-printOut(byggeLego.toString())
-printOut(brygge.toString())
+function convertTemperature(aTemperature, aType) {
+  let Fahrenheit = 0;
+  let Celsius = 0;
+  let Kelvin = 0;
+  switch (aType) {
+    case ETemperaturType.Celsius:
+      printOut("Convert from Celsius");
+      //convert to Fahrenheit
+      //Fahrenheit = (Kevin - 237.15)*9/5 + 32;
+      Celsius = aTemperature;
+      Fahrenheit = (Celsius * 9) / 5 + 32;
+      Kelvin = Celsius + 273.15;
+      break;
+    case ETemperaturType.Fahrenheit:
+      printOut("Convert from Fahrenheit");
+      Fahrenheit = aTemperature;
+      Celsius =  (Fahrenheit - 32) / 1.8;
+      Kelvin = ((Fahrenheit - 32) / 1.8) + 273.15;
+      break;
+    case ETemperaturType.Kelvin:
+      printOut("Convert from Kelvin");
+      Kelvin = aTemperature;
+      Fahrenheit = ((Kelvin - 273.15) * 9/5) + 32;
+      Celsius = (Kelvin - 273.15);
+      //Fahrenheit = (Celsius * 9) / 5 + 32;
+      break;
+  } 
+
+  printOut("Celsius = " + Celsius.toFixed(0));
+  printOut("Fahrenheit = " + Fahrenheit.toFixed(0));
+  printOut("Kelvin = " + Kelvin.toFixed(0));
+} 
+
+convertTemperature(37, ETemperaturType.Kelvin);
+
+printOut(newLine);
+
+printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
+/* Put your code below here!*/
+
+function noVAT(daPrice, vatGroup){
+
+  let taxGroup = vatGroup.toUppercase();
+  let net = NaN;
+  let vat = NaN;
+
+  printOut("Taxgroup = " + taxGroup)
+  
+  switch (taxGroup){
+  case "NORMAL":
+  if (!Number.isNaN(vat)) {
+    net = (100 * daPrice) / (25 + 100);
+  }
+
 
 }
 
 
 
-printOut("Replace this with you answer!");
-printOut(newLine);
-
-printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-printOut("Replace this with you answer!");
+printOut(net.toString());
 printOut(newLine);
 
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-
-blaBla(4,4,4,4,2)
 
 printOut("Replace this with you answer!");
 printOut(newLine);
@@ -115,5 +158,8 @@ printOut(newLine);
 /* Task 10*/
 printOut("--- Part 10 ---------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+
+
+
 printOut(newLine);
