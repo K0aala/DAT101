@@ -117,42 +117,147 @@ printOut(newLine);
 printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 
-function noVAT(daPrice, vatGroup){
 
-  let taxGroup = vatGroup.toUppercase();
+function calculateNetPrice(aPrice, aTaxGroup) {
   let net = NaN;
+  let taxGroup = aTaxGroup.toUpperCase();
   let vat = NaN;
 
-  printOut("Taxgroup = " + taxGroup)
-  
-  switch (taxGroup){
-  case "NORMAL":
-  if (!Number.isNaN(vat)) {
-    net = (100 * daPrice) / (25 + 100);
+  printOut("taxGroup = " + taxGroup);
+
+  switch (taxGroup) {
+    case "NORMAL":
+      vat = 25;
+    case "HOTEL" + "CINEMA" + "TRANSPORT":
+      vat = 10;
+    case "FOOD":
+      vat = 15;
   }
 
+  if (!Number.isNaN(vat)) {
+    net = (100 * aPrice) / (vat + 100);
+  }
 
+  return net;
+  
+  
 }
 
+const daPrice1 = calculateNetPrice(100, "normal")
+if (Number.isNaN(daPrice1)){
+  printOut("unknown VAT?!?")
+}else{
+  printOut("Da PRICE is = " + daPrice1.toFixed(2) + "NOK")
+}
 
-
-printOut(net.toString());
 printOut(newLine);
 
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 
-printOut("Replace this with you answer!");
+function calculateSpeedDistanceTime(speed, distance, time) {
+  // Check if more than one parameter is missing
+  const missingParams = [speed, distance, time].filter(param => param === 0).length;
+  if (missingParams > 1) {
+      return NaN;
+  }
+const theTime = distance / speed
+const theSpeed = distance / time
+const theDistance = speed * time
+
+printOut("Speed " + "( " + theSpeed + " )" + " = " + "Distance ( " + distance + " )" + " / " + "Time ( " + time + " )" )
+
+
+}
+
+calculateSpeedDistanceTime(4, 14)
 printOut(newLine);
 
 printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+function modifyString(text, maxSize, char, addToStart) {
+ 
+  // Check if the first parameter is a string
+  if (typeof text !== "string") {
+    text = "Error: The first parameter is not a string."
+      return text; // Returns new text value if the input is invalid
+  }
+
+  // Check the current size of the string
+  if (text.length >= maxSize) {
+      // If text is already at or above the maximum size, return it as is
+      return text;
+  }
+
+  // Calculate how many characters need to be added
+  const charsToAdd = maxSize - text.length;
+
+  // Create the string of characters to be added
+  const addedChars = char.repeat(charsToAdd);
+
+  // Modify the string based on the boolean value `addToStart`
+  const modifiedString = addToStart ? addedChars + text : text + addedChars;
+
+
+  // Return the modified string
+  return modifiedString;
+}
+
+
+
+const theText1 = modifyString("Thingy is absolute gold mannen ", 20, "*", false)
+printOut(theText1 + newLine)
+
+
+const theTextNoWork = modifyString(312, 13, ".", true)
+printOut(theTextNoWork)
+
+const theTextNotLong = modifyString("hello", 10, "#", false)
+printOut(theTextNotLong)
+
 printOut(newLine);
 
 printOut("--- Part 9 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+function testIfMathIsFun() {
+  let op = 1;
+  let line = 1;
+  // Left side
+  let ok = false;
+  do {
+    let sumLeft = 0;
+    for (let left = 0; left < line + 1; left++) {
+      sumLeft += op;
+      op++;
+    }
+
+    let sumRight = 0;
+    for (let right = 0; right < line; right++) {
+      sumRight += op;
+      op++;
+    }
+
+    if (sumLeft !== sumRight) {
+      ok = false;
+      printOut("Error in line " + line.toString());
+    }else{
+      ok = true;
+    }
+    line++;
+
+    if(line > 200){
+      printOut("Math is Fun!");
+      break;
+    }
+    
+  } while (ok);
+}
+
+testIfMathIsFun();
+
+
 printOut(newLine);
 
 /* Task 10*/
@@ -160,6 +265,27 @@ printOut("--- Part 10 ----------------------------------------------------------
 /* Put your code below here!*/
 
 
+function factorial(n, original = n) {
+
+  if (n === 0 || n === 1) {
+      return 1;
+  }
+
+  
+  let result = n * factorial(n - 1, original);
+  
+  if (n === original) {
+
+    let sequence = Array.from({ length: original }, (_, i) => i + 1).join(" * ")
+      printOut("The factorial of " + original + "! = " + sequence + " = " +  + result);
+  }
+
+  return result; 
+}
+
+
+factorial(5); 
+factorial(6); 
 
 
 printOut(newLine);
