@@ -14,10 +14,12 @@ this.#angle = 0
 }
 
 get value(){
-    let value = this.#amplitude * Math.sin(this#angle);
+    let value = this.#amplitude * Math.sin(this#angle * RAD);
     this.#angle += this.#frequency;
     return value;
 
 }
 
 }
+
+TSinWave
