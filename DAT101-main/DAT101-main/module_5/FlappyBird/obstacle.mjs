@@ -18,11 +18,10 @@ class TObstacle {
     top += this.#spi.height + 150;
     const gap = top - groundY - 25;
 
-    top = Math.floor(Math.random() * gap) + groundY - 25;
+    top = Math.floor(Math.random() * gap) + groundY -25;
     pos.y = top;
     this.#lower = new libSprite.TSprite(aSpriteCanvas, aSpriteInfo, pos);
     this.#lower.index = 2;
-    this.hasPassed = false;
   }
 
   draw(){
@@ -41,14 +40,6 @@ class TObstacle {
       GameProps.hero.flap();
       GameProps.hero.isDead = true;
     }
-  }
-
-  get right(){
-    return this.#upper.right;
-  }
-
-  get left(){
-    return this.#upper.left;
   }
 
   get posX(){
